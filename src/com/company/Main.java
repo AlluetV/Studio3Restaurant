@@ -1,6 +1,6 @@
 package com.company;
 
-import restaurant.Menu;
+import com.company.restaurant.Menu;
 
 public class Main {
 

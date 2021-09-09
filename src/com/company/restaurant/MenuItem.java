@@ -1,4 +1,4 @@
-package restaurant;
+package com.company.restaurant;
 
 public class MenuItem {
     
