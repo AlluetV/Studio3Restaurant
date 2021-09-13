@@ -1,5 +1,7 @@
 package com.company.restaurant;
 
+import java.util.Objects;
+
 public class MenuItem {
     
     //fields
@@ -66,5 +68,18 @@ public class MenuItem {
                 ", price=" + price +
                 ", isNew='" + isNew + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Double.compare(menuItem.price, price) == 0 && Objects.equals(nameItem, menuItem.nameItem) && Objects.equals(description, menuItem.description) && Objects.equals(isNew, menuItem.isNew);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameItem, description, price, isNew);
     }
 }

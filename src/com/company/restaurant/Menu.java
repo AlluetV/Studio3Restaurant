@@ -1,17 +1,20 @@
 package com.company.restaurant;
 
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
 public class Menu {
 
    private Map<String, List<MenuItem>> categories;
+   private LocalDateTime lastUpdated;
 
 
 
     public Menu(){
         categories = new HashMap<>();
+        lastUpdated = LocalDateTime.now();
     }
 
 
@@ -63,6 +66,43 @@ public class Menu {
                 System.out.println(myItem.getDescription() + "\n");
 
             }
+        }
+        System.out.println("Last Updated: "+lastUpdated.toString());
+    }
+
+    //Duplicates
+    public  void addItem(String categoryItem, MenuItem item){
+        for (Map.Entry<String, List<MenuItem>> category : categories.entrySet()) {
+            List<MenuItem> categoryList = category.getValue();
+            if(categoryList.contains(item)){
+                System.out.println("Duplicated on category " +category.getKey() + ": "+ item.toString());
+                return;//finish the method
+            }
+        }
+        if(categories.containsKey(categoryItem)){
+            List<MenuItem> menuItems = categories.get(categoryItem);
+            menuItems.add(item);
+        }else{
+            List<MenuItem> menuItems = new LinkedList<>();
+            menuItems.add(item);
+            categories.put(categoryItem, menuItems);
+        }
+        lastUpdated =LocalDateTime.now();
+    }
+
+
+    public void searchItem(String dishName){
+        for (Map.Entry<String, List<MenuItem>> category : categories.entrySet()) {
+            List<MenuItem> categoryList = category.getValue();
+            for(MenuItem myItem : categoryList) {
+                if(myItem.getNameItem().equals(dishName)){
+                    System.out.println("Item found in category: " + category.getKey());
+                    System.out.println(myItem.getNameItem()+"....................." + myItem.getPrice());
+                    System.out.println(myItem.getDescription() + "\n");
+                }
+
+            }
+
         }
     }
 
